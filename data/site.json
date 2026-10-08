@@ -37,7 +37,6 @@
     "introSkills": "The languages, frameworks and tools I reach for most often.",
     "introContact": "I am open to algorithm and machine learning engineering roles, and to research collaborations.",
     "labelEmail": "Email",
-    "labelPhone": "Phone",
     "labelResume": "Download CV",
     "labelBackToTop": "Back to top",
     "labelPresent": "Present",
@@ -83,7 +82,6 @@
       "Comfortable across the stack: model training, embedded signal processing, and the services around them"
     ],
     "email": "billchen2022@gmail.com",
-    "phone": "+86 13800000000 +86 13800000000",
     "resumeUrl": ""
   },
   "about": {
@@ -340,16 +338,6 @@
         "label": "Email",
         "value": "billchen2022@gmail.com",
         "url": "mailto:billchen2022@gmail.com"
-      },
-      {
-        "label": "Phone",
-        "value": "+86 13800000000",
-        "url": "tel:+8613800000000"
-      },
-      {
-        "label": "Phone (HK)",
-        "value": "+86 13800000000",
-        "url": "tel:+8613800000000"
       }
     ]
   }

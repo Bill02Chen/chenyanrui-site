@@ -19,6 +19,17 @@ IGNORED_TOKENS = {"710", "538", "636"}  # CET score denominators
 # JSON paths whose digits are links/metadata, not résumé claims.
 SKIP_PATH_PARTS = (".url", "langSwitchHref", ".initials")
 
+# Detects a published phone number: a country code followed by a long digit run,
+# or the Chinese mainland form with a separator.
+PHONE_RE = re.compile(
+    r"""
+    (?:\+\d{1,3}[\s\-]?\d[\d\s\-]{7,})     # +86 13800000000, +86 13800000000
+    | (?:\b1[3-9]\d{9}\b)                  # bare mainland mobile, e.g. 13800000000
+    | (?:\b\d{4}[\s\-]\d{7,}\b)            # 1861 7317138
+    """,
+    re.VERBOSE,
+)
+
 
 def docx_text(path: Path) -> str:
     """Full text of a docx, including every table cell.
@@ -197,6 +208,11 @@ def main() -> int:
         for key, value in site["ui"].items():
             if not str(value).strip():
                 failures.append(f"[{label}] ui.{key} is empty")
+
+        # --- 4. privacy: the published site must not expose a phone number ---
+        for path, text in walk_strings(site):
+            if PHONE_RE.search(text) or text.strip().lower().startswith("tel:"):
+                failures.append(f"[{label}] phone number published at {path}: {text!r}")
 
         print(f"  projects: {len(site['projects'])}, ui keys: {len(site['ui'])}")
         print(f"  education: {len(site['education'])}, experience: {len(site['experience'])}")
