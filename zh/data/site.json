@@ -37,7 +37,6 @@
     "introSkills": "我日常使用最多的编程语言、框架与工具。",
     "introContact": "我目前在寻找算法与机器学习工程方向的岗位，也欢迎研究上的交流与合作。",
     "labelEmail": "邮箱",
-    "labelPhone": "电话",
     "labelResume": "下载简历",
     "labelBackToTop": "返回顶部",
     "labelPresent": "至今",
@@ -83,7 +82,6 @@
       "横跨模型训练、嵌入式信号处理与配套服务，能独立打通整条链路"
     ],
     "email": "billchen2022@gmail.com",
-    "phone": "+86 13800000000",
     "resumeUrl": ""
   },
   "about": {
@@ -340,16 +338,6 @@
         "label": "邮箱",
         "value": "billchen2022@gmail.com",
         "url": "mailto:billchen2022@gmail.com"
-      },
-      {
-        "label": "电话",
-        "value": "+86 13800000000",
-        "url": "tel:+8613800000000"
-      },
-      {
-        "label": "电话（香港）",
-        "value": "+86 13800000000",
-        "url": "tel:+8613800000000"
       }
     ]
   }
