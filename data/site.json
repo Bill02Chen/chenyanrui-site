@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "lang": "en",
+    "title": "Yanrui Chen — AI Engineer & MSc Student",
+    "description": "Yanrui Chen is an MSc in Artificial Intelligence candidate at CUHK building real-time ML systems for wearable robotics, medical imaging, and large language models.",
+    "footerNote": "Built with plain HTML, CSS and JavaScript. Hosted anywhere."
+  },
+  "ui": {
+    "navAbout": "About",
+    "navExperience": "Experience",
+    "navProjects": "Projects",
+    "navSkills": "Skills",
+    "navContact": "Contact",
+    "langSwitchLabel": "中文",
+    "langSwitchHref": "./zh/",
+    "eyebrowFocus": "Focus",
+    "eyebrowExperience": "Experience",
+    "eyebrowProjects": "Project work",
+    "eyebrowSkills": "Capabilities",
+    "eyebrowContact": "Get in touch",
+    "headingAbout": "Building models that survive the real world",
+    "headingExperience": "Where I have worked",
+    "headingProjects": "Things I have built",
+    "headingSkills": "Toolbox",
+    "headingContact": "Let's talk",
+    "headingEducation": "Education",
+    "headingInternship": "Internship",
+    "headingResearch": "Research",
+    "kindInternship": "Internship",
+    "kindResearch": "Research",
+    "headingProgramming": "Programming languages",
+    "headingFrameworks": "Frameworks & tools",
+    "headingLanguages": "Languages",
+    "headingInterests": "Interests",
+    "introExperience": "Industrial algorithm work on exoskeleton control, plus research on sequence models for nonlinear physics.",
+    "introProjects": "Applied AI and systems projects from coursework, a training camp, and independent work.",
+    "introSkills": "The languages, frameworks and tools I reach for most often.",
+    "introContact": "I am open to algorithm and machine learning engineering roles, and to research collaborations.",
+    "labelEmail": "Email",
+    "labelPhone": "Phone",
+    "labelResume": "Download CV",
+    "labelBackToTop": "Back to top",
+    "labelPresent": "Present",
+    "themeToggleLabel": "Toggle dark mode"
+  },
+  "hero": {
+    "name": "Yanrui Chen",
+    "initials": "YC",
+    "role": "MSc in Artificial Intelligence · Real-time ML for wearable robotics",
+    "summary": "I am a Master of Science in Artificial Intelligence candidate at The Chinese University of Hong Kong, working at the point where machine learning has to run on real hardware in real time. My current work at Shenzhen Yunmostar builds EMG-and-IMU driven gait control for industrial exoskeletons, where a model is only useful if it clears its latency budget. Before that I trained on computer engineering at CUHK-Shenzhen, and I have since shipped projects spanning medical ultrasound segmentation, LLM fine-tuning, and a high-concurrency live auction backend.",
+    "facts": [
+      "Hong Kong",
+      "MSc AI, CUHK",
+      "BEng Computer Engineering",
+      "Exoskeleton control algorithms"
+    ],
+    "stats": [
+      {
+        "value": "3.8",
+        "unit": "/4",
+        "label": "Master's GPA"
+      },
+      {
+        "value": "12",
+        "unit": "FPS",
+        "label": "Real-time inference, single RTX 4090"
+      },
+      {
+        "value": "1,000",
+        "unit": "+",
+        "label": "Concurrent users per live room"
+      },
+      {
+        "value": "88.2",
+        "unit": "%",
+        "label": "Gait initiation recall"
+      }
+    ],
+    "highlights": [
+      "Built the industry's first EMG-fused real-time gait start/stop detection system for an exoskeleton",
+      "Fine-tuned a 90M-parameter ViT encoder to lift ultrasound lesion IoU from 0.093 to 0.737",
+      "Designed a fully asynchronous Redis bidding pipeline holding 11.4 ms average latency under load",
+      "Comfortable across the stack: model training, embedded signal processing, and the services around them"
+    ],
+    "email": "billchen2022@gmail.com",
+    "phone": "+86 13800000000 +86 13800000000",
+    "resumeUrl": ""
+  },
+  "about": {
+    "paragraphs": [
+      "I build systems where a model has to survive contact with the physical world. At Yunmostar I designed, from scratch, a real-time gait start/stop detection system that fuses 10 channels of EMG with 78 channels of inertial signals to drive an industrial exoskeleton. The hard part was never the architecture — it was holding a precision target above 85% while staying inside a real-time control loop, which is why the final design pairs a dual-scale causal TCN with multi-seed ensembling and a gated confirmation stage to suppress false triggers.",
+      "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I replaced a lab-bound force plate with a smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction, reaching 0.15 body-weight cross-subject accuracy. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
+      "I am currently finishing my MSc in Artificial Intelligence at CUHK, after a BEng in Computer Engineering at CUHK-Shenzhen. Outside of coursework I like problems with a hard number attached to them — a latency budget, an accuracy floor, a crash-recovery deadline."
+    ],
+    "focusAreas": [
+      {
+        "title": "Real-time biosignal ML",
+        "description": "Causal, low-latency models over high-channel-count EMG and IMU streams, built to run inside a control loop rather than an offline notebook."
+      },
+      {
+        "title": "Medical imaging",
+        "description": "Adapting foundation models such as MedSAM to prompt-free clinical tasks with patient-level splits and honest generalization checks."
+      },
+      {
+        "title": "LLM fine-tuning and data quality",
+        "description": "Full fine-tuning and data cleaning pipelines, because dataset quality usually moves the benchmark more than hyperparameters do."
+      },
+      {
+        "title": "High-concurrency backends",
+        "description": "Asynchronous, Redis-centred service design with atomic locking, rate limiting and self-healing supervision."
+      }
+    ]
+  },
+  "education": [
+    {
+      "school": "The Chinese University of Hong Kong",
+      "degree": "Master of Science in Artificial Intelligence",
+      "period": "Sep 2025 – Mar 2027",
+      "location": "Hong Kong",
+      "gpa": "3.8/4",
+      "courses": "Natural Language Processing, Generative AI, Speech and Language Processing",
+      "highlights": []
+    },
+    {
+      "school": "The Chinese University of Hong Kong, Shenzhen",
+      "degree": "Bachelor of Engineering in Computer Engineering",
+      "period": "Sep 2021 – Jun 2025",
+      "location": "Shenzhen",
+      "gpa": "3.4/4",
+      "courses": "Operating Systems, Database Systems, Software Engineering, Digital Logic and Systems, Digital Signal Processing, Microprocessors and Computer Systems, Machine Intelligence and Applications, Optimization, Digital Image Processing, Human-Computer Interaction, Robotics",
+      "highlights": []
+    }
+  ],
+  "experience": [
+    {
+      "organization": "Shenzhen Yunmostar Artificial Intelligence Co., Ltd.",
+      "role": "Algorithm Intern",
+      "period": "Jul 2026 – Present",
+      "location": "Shenzhen",
+      "kind": "internship",
+      "summary": "Building the sensing and control algorithms that let an industrial exoskeleton read human intent and estimate human pose in real time.",
+      "highlights": [
+        "Exoskeleton start/stop control had no industrial precedent using EMG, so the system had to be built from scratch against a Precision ≥ 85% target; I designed a real-time detection system fusing 10 channels of EMG with 78 channels of inertial signals, using a dual-scale causal TCN with gated confirmation to suppress false triggers.",
+        "The system reached 88.2% initiation Recall and 86.2% termination Precision, meeting the requirements for real-time control deployment.",
+        "Exoskeleton control requires accurate human pose input; I reproduced the GlobalPose method and adapted it to the production pipeline, optimizing along both matrix calibration and model training, with mocap ground truth guiding recalibration of the forearm RSB transform matrix.",
+        "Reduced local rotation error by 17.0% (19.63° → 16.29°) and left-wrist relative error by 76.9%, substantially improving upper-body pose accuracy.",
+        "Raw insole signals cannot directly represent vertical ground reaction force, and professional force measurement equipment is expensive and hard to scale; I proposed a force-plate-free insole vertical force calibration method combining static double-support constraints with CNN-BiLSTM dynamic force prediction, reaching 0.15 body-weight cross-subject accuracy."
+      ]
+    },
+    {
+      "organization": "The Chinese University of Hong Kong, Shenzhen",
+      "role": "Research — Predicting Ultrafast Nonlinear Dynamics in Fibre Optics with LSTM",
+      "period": "Sep 2024 – May 2025",
+      "location": "Shenzhen",
+      "kind": "research",
+      "summary": "Predicting ultrafast nonlinear dynamics in optical fibres is computationally expensive, and conventional numerical methods struggle with the complex-valued nature of the data.",
+      "highlights": [
+        "Engineered a customized LSTM cell in Python designed to process complex-valued data, and trained the network on optical pulse propagation data under Prof. Yuan Luo.",
+        "Validated that recurrent neural networks can effectively forecast propagation pulses in optical fibres, demonstrating their capacity to handle complex data in nonlinear dynamic environments."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Full-stack Live-stream E-commerce Auction System",
+      "period": "May – Jun 2026",
+      "context": "ByteDance training camp",
+      "tagline": "Millisecond bid synchronization without synchronous database writes.",
+      "highlights": [
+        "Designed a fully asynchronous bidding pipeline using pure in-memory Redis operations with 5-second batch persistence to MySQL.",
+        "Implemented Lua-script atomic distributed locks, Redis ZSet real-time leaderboards, per-user rate limiting, and a triple-heartbeat self-healing daemon.",
+        "Built a React and TypeScript frontend with a Node.js and Socket.IO backend and one-click Docker deployment.",
+        "Sustained 1,000+ concurrent users per live room at a 98.4% bid success rate with 11.4 ms average and 65 ms P99 latency.",
+        "Recovered all active auctions within 1 second after a full Redis crash, with zero manual intervention."
+      ],
+      "stack": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Socket.IO",
+        "Redis",
+        "MySQL",
+        "Docker"
+      ]
+    },
+    {
+      "title": "VLM-based Medical Ultrasound Anomaly Detection",
+      "period": "Apr 2026",
+      "context": "CUHK",
+      "tagline": "Removing MedSAM's dependence on manual position prompts.",
+      "highlights": [
+        "Benchmarked raw MedSAM to quantify its prompt-free limitations in automated clinical workflows.",
+        "Froze the prompt encoder and fine-tuned the 90M-parameter ViT image encoder and mask decoder on the BUS-UCLM and BUSI ultrasound datasets with a hybrid BCE and Dice loss.",
+        "Used patient-level data splits to prevent leakage between training and evaluation.",
+        "Improved IoU from 0.093 to 0.737 and F1 from 0.157 to 0.823 on BUS-UCLM.",
+        "Generalized to the unseen BUSI dataset, sustaining 12 FPS inference on a single RTX 4090."
+      ],
+      "stack": [
+        "PyTorch",
+        "MedSAM",
+        "ViT",
+        "BUS-UCLM",
+        "BUSI"
+      ]
+    },
+    {
+      "title": "Data Cleaning and Fine-tuning for a Lightweight LLM",
+      "period": "Feb 2026",
+      "context": "CUHK",
+      "tagline": "Turning a noisy corpus into something a small model can actually learn from.",
+      "highlights": [
+        "Diagnosed formatting issues, quality problems and semantic inconsistencies in the raw dataset, which made it unsuitable for effective fine-tuning.",
+        "Designed a data cleaning pipeline addressing non-standard roles, missing fields, duplicate text and semantic consistency, then ran full fine-tuning with optimized hyperparameters in LLaMA-Factory.",
+        "The cleaned dataset markedly improved model performance while holding base model capability on other benchmarks."
+      ],
+      "stack": [
+        "LLaMA-Factory",
+        "Python",
+        "Data cleaning"
+      ]
+    },
+    {
+      "title": "Personalized Email Agent for a Campus Context",
+      "period": "Nov 2025",
+      "context": "CUHK",
+      "tagline": "On-device email triage that avoids cloud privacy risk and API cost.",
+      "highlights": [
+        "Designed a multi-agent system on the ERNIE-Speed (10–15B) model using a parallel-serial pipeline.",
+        "Implemented Chain-of-Thought prompting and retrieval-augmented generation over a campus knowledge base.",
+        "Reached near-human labelling accuracy with precise extraction of course names, professors and deadlines, eliminating API costs and keeping deployment privacy-preserving and on-device."
+      ],
+      "stack": [
+        "ERNIE-Speed",
+        "RAG",
+        "Chain-of-Thought",
+        "Multi-agent"
+      ]
+    },
+    {
+      "title": "Brick Building Game with Leap Motion in Unity",
+      "period": "Apr 2025",
+      "context": "CUHK-Shenzhen",
+      "tagline": "Gesture-driven construction in a hand-tracked 3D space.",
+      "highlights": [
+        "Developed a Unity-based brick building game integrating Leap Motion hand tracking.",
+        "Implemented gesture recognition for brick selection, rotation and placement using C# scripting.",
+        "Delivered a functional prototype that lets players build brick structures using hand gestures."
+      ],
+      "stack": [
+        "Unity",
+        "C#",
+        "Leap Motion"
+      ]
+    },
+    {
+      "title": "Smoothing and Edge Enhancement for Artistic Style Images",
+      "period": "Jul 2024",
+      "context": "CUHK-Shenzhen",
+      "tagline": "Classical image processing to restyle a photograph.",
+      "highlights": [
+        "Combined smoothing and edge detection to transform an image into a different artistic style through edge enhancement.",
+        "Designed colour adjustment and image merge methods to optimize the visual result.",
+        "Implemented the functions in Python and MATLAB and achieved acceptable results."
+      ],
+      "stack": [
+        "Python",
+        "MATLAB",
+        "Image processing"
+      ]
+    },
+    {
+      "title": "Content-Based Image Retrieval with a Database System",
+      "period": "Dec 2023",
+      "context": "CUHK-Shenzhen",
+      "tagline": "Pairing feature matching with a relational store.",
+      "highlights": [
+        "Worked as a team member to combine image retrieval with a database system.",
+        "Designed the database schema for image storage, feature storage and picture matching.",
+        "Integrated Python and MySQL code to achieve picture access and feature access."
+      ],
+      "stack": [
+        "Python",
+        "MySQL",
+        "Database design"
+      ]
+    },
+    {
+      "title": "2-Player Bouncing Ball Game on a Cortex-M3 Board",
+      "period": "Dec 2023",
+      "context": "CUHK-Shenzhen",
+      "tagline": "A real-time game on bare-metal embedded hardware.",
+      "highlights": [
+        "Wrote C++ code to implement and synchronize GPIO, USART, LCD, external interrupts and timers on a Cortex-M3 development board.",
+        "Delivered a smooth, lag-free gaming experience on embedded hardware, demonstrating low-level programming and embedded systems expertise."
+      ],
+      "stack": [
+        "C++",
+        "Cortex-M3",
+        "Embedded",
+        "GPIO",
+        "USART"
+      ]
+    }
+  ],
+  "skills": {
+    "programming": [
+      "Python",
+      "C++",
+      "Java",
+      "MATLAB",
+      "VHDL",
+      "Verilog"
+    ],
+    "frameworks": [
+      "TensorFlow",
+      "PyTorch",
+      "MySQL",
+      "Unity",
+      "Blender",
+      "Figma",
+      "ROS2"
+    ],
+    "languages": [
+      "English (advanced, CET6 538/710, CET4 636/710)",
+      "Chinese (native)",
+      "Cantonese (fluent)",
+      "German (beginner)"
+    ],
+    "interests": [
+      "Animation",
+      "Games",
+      "Human-Computer Interaction",
+      "Large language models"
+    ]
+  },
+  "contact": {
+    "lede": "If you are hiring for algorithm or machine learning engineering, or you want to compare notes on real-time biosignal models, send me a note. I read everything.",
+    "links": [
+      {
+        "label": "Email",
+        "value": "billchen2022@gmail.com",
+        "url": "mailto:billchen2022@gmail.com"
+      },
+      {
+        "label": "Phone",
+        "value": "+86 13800000000",
+        "url": "tel:+8613800000000"
+      },
+      {
+        "label": "Phone (HK)",
+        "value": "+86 13800000000",
+        "url": "tel:+8613800000000"
+      }
+    ]
+  }
+}

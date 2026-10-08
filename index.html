@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yanrui Chen — AI Engineer</title>
+    <meta name="description" content="Personal website of Yanrui Chen." />
+    <meta name="author" content="Yanrui Chen" />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Yanrui Chen — AI Engineer" />
+    <meta
+      property="og:description"
+      content="MSc in Artificial Intelligence at CUHK. Real-time ML for wearable robotics, medical imaging and large language models."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="assets/styles.css" />
+
+    <script>
+      /* Resolve the theme before first paint to avoid a flash. A saved choice
+         wins; otherwise the OS preference is written out so the toggle icon
+         reflects the theme that is actually showing. */
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (theme !== "dark" && theme !== "light") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+
+    <div class="shell">
+      <!-- ================= Identity rail (sticky) ================= -->
+      <aside class="rail">
+        <div class="rail-top">
+          <span class="monogram" id="monogram" aria-hidden="true">YC</span>
+          <div class="rail-controls" id="rail-controls">
+            <a class="control" id="lang-switch" href="./zh/" hreflang="zh-Hans" title="中文">中文</a>
+            <button
+              class="control theme-toggle"
+              id="theme-toggle"
+              type="button"
+              aria-label="Toggle dark mode"
+            >
+              <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6" />
+                <path
+                  d="M12 2.4v2.2M12 19.4v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="identity">
+          <h1 id="name">—</h1>
+          <p class="role" id="role"></p>
+          <p class="summary" id="summary"></p>
+          <div class="fact-row" id="facts"></div>
+        </div>
+
+        <div class="stats" id="stats"></div>
+
+        <nav class="rail-nav" id="nav" aria-label="Section navigation"></nav>
+
+        <div class="rail-contact" id="rail-contact"></div>
+      </aside>
+
+      <!-- ================= Scrolling column ================= -->
+      <main class="column" id="main">
+        <section class="section" id="about">
+          <div class="section-head">
+            <p class="eyebrow" id="eyebrow-focus"></p>
+            <div>
+              <h2 id="heading-about"></h2>
+              <p class="section-intro" id="intro-about"></p>
+            </div>
+          </div>
+          <div class="prose" id="about-prose"></div>
+          <div class="focus-grid" id="focus-grid"></div>
+        </section>
+
+        <section class="section" id="experience">
+          <div class="section-head">
+            <p class="eyebrow" id="eyebrow-experience"></p>
+            <div>
+              <h2 id="heading-experience"></h2>
+              <p class="section-intro" id="intro-experience"></p>
+            </div>
+          </div>
+
+          <h3 class="group-label" id="edu-label"></h3>
+          <div class="timeline" id="education-timeline"></div>
+
+          <h3 class="group-label" id="work-label"></h3>
+          <div class="timeline" id="experience-timeline"></div>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-head">
+            <p class="eyebrow" id="eyebrow-projects"></p>
+            <div>
+              <h2 id="heading-projects"></h2>
+              <p class="section-intro" id="intro-projects"></p>
+            </div>
+          </div>
+          <div id="project-list"></div>
+        </section>
+
+        <section class="section" id="skills">
+          <div class="section-head">
+            <p class="eyebrow" id="eyebrow-skills"></p>
+            <div>
+              <h2 id="heading-skills"></h2>
+              <p class="section-intro" id="intro-skills"></p>
+            </div>
+          </div>
+          <div class="skill-groups" id="skill-groups"></div>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="section-head">
+            <p class="eyebrow" id="eyebrow-contact"></p>
+            <div>
+              <h2 id="heading-contact"></h2>
+              <p class="section-intro" id="intro-contact"></p>
+            </div>
+          </div>
+          <p class="contact-lede" id="contact-lede"></p>
+          <div class="contact-links" id="contact-links"></div>
+
+          <footer class="site-footer">
+            <span id="footer-note"></span>
+            <a class="to-top rule-link" href="#main" id="to-top">Back to top ↑</a>
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="assets/app.js"></script>
+  </body>
+</html>
