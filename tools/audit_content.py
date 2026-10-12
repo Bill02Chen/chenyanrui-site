@@ -23,7 +23,7 @@ SKIP_PATH_PARTS = (".url", "langSwitchHref", ".initials")
 # or the Chinese mainland form with a separator.
 PHONE_RE = re.compile(
     r"""
-    (?:\+\d{1,3}[\s\-]?\d[\d\s\-]{7,})     # +86 13800000000, +86 13800000000
+    (?:\+\d{1,3}[\s\-]?\d[\d\s\-]{7,})     # +86 13800000000, +852 50000000
     | (?:\b1[3-9]\d{9}\b)                  # bare mainland mobile, e.g. 13800000000
     | (?:\b\d{4}[\s\-]\d{7,}\b)            # 1380 0000000
     """,
@@ -102,9 +102,9 @@ def numbers(text: str) -> set[str]:
 
     Normalizes the forms that legitimately differ between a résumé and a web
     page: thousands separators ("1,000" vs "1000"), 万/K scale words
-    ("24万" vs "240K" vs "240000"), and telephones, where the résumé packs
-    "+86 13800000000 +86 13800000000" onto one line and the site lists the two
-    numbers separately.
+    ("24万" vs "240K" vs "240000"), and telephone numbers, which a résumé may
+    pack onto one line ("+86 13800000000 +86 13800000000") while the site lists
+    them as separate values.
     """
     found = set(re.findall(r"\d+(?:\.\d+)?", text))
     out = set(found)

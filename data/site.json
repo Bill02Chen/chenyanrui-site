@@ -67,7 +67,7 @@
       {
         "value": "1,000",
         "unit": "+",
-        "label": "Concurrent users per live room"
+        "label": "Concurrent WebSocket connections per live room"
       },
       {
         "value": "88.2",
@@ -87,7 +87,7 @@
   "about": {
     "paragraphs": [
       "I build systems where a model has to survive contact with the physical world. At Yunmostar I designed, from scratch, a real-time gait start/stop detection system that fuses 10 channels of EMG with 78 channels of inertial signals to drive an industrial exoskeleton. The hard part was never the architecture — it was holding a precision target above 85% while staying inside a real-time control loop, which is why the final design pairs a dual-scale causal TCN with multi-seed ensembling and a gated confirmation stage to suppress false triggers.",
-      "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I replaced a lab-bound force plate with a smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction, reaching 0.15 body-weight cross-subject accuracy. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
+      "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I replaced a lab-bound force plate with a smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction, validated with 15-subject leave-one-subject-out on the Krumm dataset, it reached a normalized RMSE of 0.15 body weight for the dynamic reference in walking. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
       "I am currently finishing my MSc in Artificial Intelligence at CUHK, after a BEng in Computer Engineering at CUHK-Shenzhen. Outside of coursework I like problems with a hard number attached to them — a latency budget, an accuracy floor, a crash-recovery deadline."
     ],
     "focusAreas": [
@@ -140,9 +140,9 @@
       "highlights": [
         "Exoskeleton start/stop control had no industrial precedent using EMG, so the system had to be built from scratch against a Precision ≥ 85% target; I designed a real-time detection system fusing 10 channels of EMG with 78 channels of inertial signals, using a dual-scale causal TCN with gated confirmation to suppress false triggers.",
         "The system reached 88.2% initiation Recall and 86.2% termination Precision, meeting the requirements for real-time control deployment.",
-        "Exoskeleton control requires accurate human pose input; I reproduced the GlobalPose method and adapted it to the production pipeline, optimizing along both matrix calibration and model training, with mocap ground truth guiding recalibration of the forearm RSB transform matrix.",
-        "Reduced local rotation error by 17.0% (19.63° → 16.29°) and left-wrist relative error by 76.9%, substantially improving upper-body pose accuracy.",
-        "Raw insole signals cannot directly represent vertical ground reaction force, and professional force measurement equipment is expensive and hard to scale; I proposed a force-plate-free insole vertical force calibration method combining static double-support constraints with CNN-BiLSTM dynamic force prediction, reaching 0.15 body-weight cross-subject accuracy."
+        "Exoskeleton control requires accurate upper-body pose input; I reproduced two sparse-IMU pose estimation methods (GlobalPose and GRIP) and unified their evaluation protocols, then adapted GlobalPose to the company IMU pipeline.",
+        "Through matrix decomposition and single-variable substitution I located the forearm sensor-to-bone rotation (RSB) as a major error source; an in-sample, mocap-fitted RSB correction cut local rotation error by 17.0% (19.63° → 16.29°, 2 trials with 1 fitting session each) and left-wrist relative position error by 76.9%.",
+        "Raw insole signals cannot directly represent vertical ground reaction force, and professional force measurement equipment is expensive and hard to scale; I proposed a force-plate-free insole vertical force calibration method combining static double-support constraints with CNN-BiLSTM dynamic force prediction; validated with 15-subject leave-one-subject-out on the Krumm dataset, the dynamic reference reached a normalized RMSE of 0.15 body weight in walking."
       ]
     },
     {
@@ -162,14 +162,14 @@
     {
       "title": "Full-stack Live-stream E-commerce Auction System",
       "period": "May – Jun 2026",
-      "context": "ByteDance training camp",
+      "context": "2026 ByteDance AI Full-Stack Challenge (independent entry)",
       "tagline": "Millisecond bid synchronization without synchronous database writes.",
       "highlights": [
         "Designed a fully asynchronous bidding pipeline using pure in-memory Redis operations with 5-second batch persistence to MySQL.",
-        "Implemented Lua-script atomic distributed locks, Redis ZSet real-time leaderboards, per-user rate limiting, and a triple-heartbeat self-healing daemon.",
+        "Implemented an atomic Lua bidding script (now the default, replacing the original distributed-lock engine), Redis ZSet real-time leaderboards, per-user rate limiting, and a triple-heartbeat self-healing daemon.",
         "Built a React and TypeScript frontend with a Node.js and Socket.IO backend and one-click Docker deployment.",
-        "Sustained 1,000+ concurrent users per live room at a 98.4% bid success rate with 11.4 ms average and 65 ms P99 latency.",
-        "Recovered all active auctions within 1 second after a full Redis crash, with zero manual intervention."
+        "98.4% bid success rate with 11.4 ms average / 65 ms P99 client round-trip latency at 1,000 concurrent WebSocket connections per live room (local benchmark).",
+        "Rebuilds auction state from MySQL with leaderboard replay within one heartbeat after Redis state loss; post-camp self-audit raised same-millisecond burst success from 0.03% to 100% (199 ms average) and cut downstream broadcast messages ~430×."
       ],
       "stack": [
         "React",
@@ -188,10 +188,10 @@
       "tagline": "Removing MedSAM's dependence on manual position prompts.",
       "highlights": [
         "Benchmarked raw MedSAM to quantify its prompt-free limitations in automated clinical workflows.",
-        "Froze the prompt encoder and fine-tuned the 90M-parameter ViT image encoder and mask decoder on the BUS-UCLM and BUSI ultrasound datasets with a hybrid BCE and Dice loss.",
+        "Froze the prompt encoder and fine-tuned the 90M-parameter ViT image encoder and mask decoder on the BUS-UCLM training set only, with a hybrid BCE and Dice loss.",
         "Used patient-level data splits to prevent leakage between training and evaluation.",
-        "Improved IoU from 0.093 to 0.737 and F1 from 0.157 to 0.823 on BUS-UCLM.",
-        "Generalized to the unseen BUSI dataset, sustaining 12 FPS inference on a single RTX 4090."
+        "Improved IoU from 0.093 to 0.737 and F1 from 0.157 to 0.823 on BUS-UCLM (same-protocol U-Net: IoU 0.5414).",
+        "Generalized to an unseen, abnormal-only BUSI subset with IoU 0.591 vs. U-Net's 0.2603; 12 FPS at batch size 1 on a single RTX 4090."
       ],
       "stack": [
         "PyTorch",
