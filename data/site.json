@@ -70,13 +70,13 @@
         "label": "Concurrent WebSocket connections per live room"
       },
       {
-        "value": "88.2",
+        "value": "96.1",
         "unit": "%",
-        "label": "Gait initiation recall"
+        "label": "Stair transition target recall (per-subject holdout)"
       }
     ],
     "highlights": [
-      "Built the industry's first EMG-fused real-time gait start/stop detection system for an exoskeleton",
+      "Defined the scene-transition recognition task and evaluation protocol for an industrial exoskeleton, delivering a frozen model with a ROS 2 topic interface",
       "Fine-tuned a 90M-parameter ViT encoder to lift ultrasound lesion IoU from 0.093 to 0.737",
       "Designed a fully asynchronous Redis bidding pipeline holding 11.4 ms average latency under load",
       "Comfortable across the stack: model training, embedded signal processing, and the services around them"
@@ -86,7 +86,7 @@
   },
   "about": {
     "paragraphs": [
-      "I build systems where a model has to survive contact with the physical world. At Yunmostar I designed, from scratch, a real-time gait start/stop detection system that fuses 10 channels of EMG with 78 channels of inertial signals to drive an industrial exoskeleton. The hard part was never the architecture — it was holding a precision target above 85% while staying inside a real-time control loop, which is why the final design pairs a dual-scale causal TCN with multi-seed ensembling and a gated confirmation stage to suppress false triggers.",
+      "I build systems where a model has to survive contact with the physical world. At Yunmostar I defined the scene-transition recognition task for an industrial exoskeleton: deciding whether the wearer is starting to climb stairs, descend stairs, go up or down a slope, or return to level ground, so that assist torque can change smoothly at each transition. I ran an 8-stage, 108-run comparison across algorithms and four sensor placements, using a public dataset to validate the selection and company-collected data to train the deployed model; the per-subject holdout model reached 96.1% target recall on stairs (90% required). The algorithm shipped as a frozen model with a ROS 2 topic interface on a Jetson Orin Nano.",
       "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I replaced a lab-bound force plate with a smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction, validated with 15-subject leave-one-subject-out on the Krumm dataset, it reached a normalized RMSE of 0.15 body weight for the dynamic reference in walking. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
       "I am currently finishing my MSc in Artificial Intelligence at CUHK, after a BEng in Computer Engineering at CUHK-Shenzhen. Outside of coursework I like problems with a hard number attached to them — a latency budget, an accuracy floor, a crash-recovery deadline."
     ],
@@ -101,7 +101,7 @@
       },
       {
         "title": "LLM fine-tuning and data quality",
-        "description": "Full fine-tuning and data cleaning pipelines, because dataset quality usually moves the benchmark more than hyperparameters do."
+        "description": "Full fine-tuning and data cleaning pipelines; my focus is on the data side."
       },
       {
         "title": "High-concurrency backends",
@@ -136,10 +136,10 @@
       "period": "Jul 2026 – Present",
       "location": "Shenzhen",
       "kind": "internship",
-      "summary": "Building the sensing and control algorithms that let an industrial exoskeleton read human intent and estimate human pose in real time.",
+      "summary": "Building the sensing and control algorithms that let an industrial exoskeleton read human intent, recognise locomotion transitions, and estimate human pose in real time.",
       "highlights": [
-        "Exoskeleton start/stop control had no industrial precedent using EMG, so the system had to be built from scratch against a Precision ≥ 85% target; I designed a real-time detection system fusing 10 channels of EMG with 78 channels of inertial signals, using a dual-scale causal TCN with gated confirmation to suppress false triggers.",
-        "The system reached 88.2% initiation Recall and 86.2% termination Precision, meeting the requirements for real-time control deployment.",
+        "Scene-aware assist switching for an industrial exoskeleton had no comparable basis for algorithm or sensor-placement choices; I defined the evaluation protocol and ran an 8-stage, 108-run comparison across four sensor placements, using public MyPredict1 to validate the selection and company-collected data to train the deployed model.",
+        "The per-subject holdout model reached 96.1% target recall on stairs (90% required); delivered the frozen model with a ROS 2 topic interface deployed on a Jetson Orin Nano.",
         "Exoskeleton control requires accurate upper-body pose input; I reproduced two sparse-IMU pose estimation methods (GlobalPose and GRIP) and unified their evaluation protocols, then adapted GlobalPose to the company IMU pipeline.",
         "Through matrix decomposition and single-variable substitution I located the forearm sensor-to-bone rotation (RSB) as a major error source; an in-sample, mocap-fitted RSB correction cut local rotation error by 17.0% (19.63° → 16.29°, 2 trials with 1 fitting session each) and left-wrist relative position error by 76.9%.",
         "Raw insole signals cannot directly represent vertical ground reaction force, and professional force measurement equipment is expensive and hard to scale; I proposed a force-plate-free insole vertical force calibration method combining static double-support constraints with CNN-BiLSTM dynamic force prediction; validated with 15-subject leave-one-subject-out on the Krumm dataset, the dynamic reference reached a normalized RMSE of 0.15 body weight in walking."
@@ -208,8 +208,8 @@
       "tagline": "Turning a noisy corpus into something a small model can actually learn from.",
       "highlights": [
         "Diagnosed formatting issues, quality problems and semantic inconsistencies in the raw dataset, which made it unsuitable for effective fine-tuning.",
-        "Designed a data cleaning pipeline addressing non-standard roles, missing fields, duplicate text and semantic consistency, then ran full fine-tuning with optimized hyperparameters in LLaMA-Factory.",
-        "The cleaned dataset markedly improved model performance while holding base model capability on other benchmarks."
+        "Designed a data cleaning pipeline addressing non-standard roles, missing fields, duplicate text and semantic consistency, then ran full fine-tuning in LLaMA-Factory.",
+        "Kept 240,340 rows after cleaning for full fine-tuning; under an identical evaluation setup, MMLU (5-shot) improved from 0.253 to 0.400 and BoolQ from 0.632 to 0.718, while three PIQA and HellaSwag metrics decreased by 0.7–1.4 pt."
       ],
       "stack": [
         "LLaMA-Factory",

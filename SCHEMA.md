@@ -128,7 +128,7 @@ Never invent facts that are not in the source resume.
 1. **No fabrication.** Every metric (GPA, IoU, latency, recall, precision) must appear in the
    source resume. Do not round, upgrade, or invent.
 2. **Keep the numbers.** Achievement bullets must retain their quantitative results
-   (e.g. `IoU 0.093 → 0.737`, `P99 65 ms`, `Recall 88.2%`).
+   (e.g. `IoU 0.093 → 0.737`, `P99 65 ms`, `RMSE 0.15 BW`).
 3. **Bullet counts.** 2–4 bullets per entry; each bullet one sentence, no bullet longer than
    ~220 characters (EN) / ~120 characters (ZH).
 4. **Tone.** First person, concrete, no marketing adjectives ("world-class", "passionate"),
