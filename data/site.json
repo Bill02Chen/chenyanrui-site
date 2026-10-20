@@ -47,7 +47,7 @@
     "name": "Yanrui Chen",
     "initials": "YC",
     "role": "MSc in Artificial Intelligence · Real-time ML for wearable robotics",
-    "summary": "I am a Master of Science in Artificial Intelligence candidate at The Chinese University of Hong Kong, working at the point where machine learning has to run on real hardware in real time. My current work at Shenzhen Yunmostar builds EMG-and-IMU driven gait control for industrial exoskeletons, where a model is only useful if it clears its latency budget. Before that I trained on computer engineering at CUHK-Shenzhen, and I have since shipped projects spanning medical ultrasound segmentation, LLM fine-tuning, and a high-concurrency live auction backend.",
+    "summary": "I am an MSc in Artificial Intelligence candidate at CUHK. At Shenzhen Yunmostar I build EMG-and-IMU gait control for industrial exoskeletons, where a model only matters if it meets its latency budget. My projects span medical ultrasound segmentation, LLM fine-tuning, and a high-concurrency auction backend.",
     "facts": [
       "Hong Kong",
       "MSc AI, CUHK",
@@ -63,17 +63,17 @@
       {
         "value": "12",
         "unit": "FPS",
-        "label": "Real-time inference, single RTX 4090"
+        "label": "Real-time inference (RTX 4090)"
       },
       {
         "value": "1,000",
         "unit": "+",
-        "label": "Concurrent WebSocket connections per live room"
+        "label": "WebSocket connections per room"
       },
       {
         "value": "96.1",
         "unit": "%",
-        "label": "Stair transition target recall (per-subject holdout)"
+        "label": "Stair transition recall (holdout)"
       }
     ],
     "highlights": [
