@@ -475,6 +475,40 @@ button {
   font-weight: 600;
 }
 
+/* On wide screens the section index leaves the rail and sits in the page
+   margin on the right. The rail then has room for the contact rows, and the
+   index stays visible at every scroll position. */
+@media (min-width: 1360px) {
+  .column {
+    padding-right: 140px;
+  }
+
+  .rail-nav {
+    position: fixed;
+    top: 50%;
+    right: max(20px, calc((100vw - 1560px) / 2));
+    z-index: 40;
+    width: 120px;
+    padding-top: 0;
+    border-top: 0;
+    gap: 0;
+    transform: translateY(-50%);
+  }
+
+  .rail-nav a {
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 7px 18px 7px 0;
+    font-size: 0.84rem;
+    text-align: right;
+  }
+
+  .rail-nav a::before {
+    left: auto;
+    right: 0;
+  }
+}
+
 /* Rail quick contact */
 .rail-contact {
   display: flex;

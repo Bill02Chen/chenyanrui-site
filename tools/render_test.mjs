@@ -391,16 +391,21 @@ async function testLocale(label, htmlPath, jsonPath) {
   check("nav rendered (5 sections)", get("nav").childElementCount === 5, String(get("nav").childElementCount));
   check("rail contact rendered", get("rail-contact").childElementCount >= 1);
 
-  /* The GitHub profile must be reachable from the rail header, before scroll. */
+  /* Email and GitHub both live in the rail contact block, above the index. */
   const githubLink = data.contact.links.find((link) => link.url.startsWith("https://github.com/"));
-  const railGithub = get("rail-controls")
+  const railGithub = get("rail-contact")
     .querySelectorAll("a")
     .find((link) => githubLink && link.href === githubLink.url);
-  check("rail GitHub control rendered",
+  check("rail contact shows email and GitHub",
+    get("rail-contact").childElementCount === 2 &&
+      get("rail-contact").textContent.includes(data.ui.labelEmail) &&
+      get("rail-contact").textContent.includes(githubLink?.label),
+    `${get("rail-contact").childElementCount} rows`);
+  check("rail GitHub contact row rendered",
     Boolean(railGithub) &&
       railGithub.target === "_blank" &&
       railGithub.rel === "noreferrer" &&
-      railGithub.textContent === githubLink?.label,
+      railGithub.textContent === githubLink?.value,
     railGithub ? railGithub.textContent : "missing");
 
   check("monogram rendered", get("monogram").textContent === data.hero.initials);
