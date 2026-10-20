@@ -307,6 +307,25 @@
         "USART"
       ],
       "repo": ""
+    },
+    {
+      "title": "Two-pass MIPS Assembler",
+      "period": "Feb 2023",
+      "context": "Course project, CUHK-Shenzhen",
+      "tagline": "Turning MIPS assembly into machine code while resolving forward labels.",
+      "highlights": [
+        "Wrote a two-pass assembler in C++ with a shared label table: the first pass records label positions, the second encodes R-, I- and J-format instructions.",
+        "Resolved forward branch and jump targets before encoding, so a label can be referenced before its definition.",
+        "Compared the generated output with three course test programs and their expected machine code.",
+        "Documented the encoding rules, test cases and design in the project report."
+      ],
+      "stack": [
+        "C++",
+        "MIPS",
+        "Assembler",
+        "Make"
+      ],
+      "repo": "https://github.com/Bill02Chen/MIPS-assembler"
     }
   ],
   "skills": {
