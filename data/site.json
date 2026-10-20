@@ -33,14 +33,15 @@
     "headingLanguages": "Languages",
     "headingInterests": "Interests",
     "introExperience": "Industrial algorithm work on exoskeleton control, plus research on sequence models for nonlinear physics.",
-    "introProjects": "Applied AI and systems projects from coursework, a training camp, and independent work.",
+    "introProjects": "Selected work from coursework, a training camp, and independent builds. Repositories are linked where the code is public.",
     "introSkills": "The languages, frameworks and tools I reach for most often.",
     "introContact": "I am open to algorithm and machine learning engineering roles, and to research collaborations.",
     "labelEmail": "Email",
     "labelResume": "Download CV",
     "labelBackToTop": "Back to top",
     "labelPresent": "Present",
-    "themeToggleLabel": "Toggle dark mode"
+    "themeToggleLabel": "Toggle dark mode",
+    "labelRepo": "Repository"
   },
   "hero": {
     "name": "Yanrui Chen",
@@ -55,7 +56,7 @@
     ],
     "stats": [
       {
-        "value": "3.8",
+        "value": "3.6",
         "unit": "/4",
         "label": "Master's GPA"
       },
@@ -87,7 +88,7 @@
   "about": {
     "paragraphs": [
       "I build systems where a model has to survive contact with the physical world. At Yunmostar I defined the scene-transition recognition task for an industrial exoskeleton: deciding whether the wearer is starting to climb stairs, descend stairs, go up or down a slope, or return to level ground, so that assist torque can change smoothly at each transition. I ran an 8-stage, 108-run comparison across algorithms and four sensor placements, using a public dataset to validate the selection and company-collected data to train the deployed model; the per-subject holdout model reached 96.1% target recall on stairs (90% required). The algorithm shipped as a frozen model with a ROS 2 topic interface on a Jetson Orin Nano.",
-      "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I replaced a lab-bound force plate with a smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction, validated with 15-subject leave-one-subject-out on the Krumm dataset, it reached a normalized RMSE of 0.15 body weight for the dynamic reference in walking. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
+      "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I proposed a force-plate-free smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction; validated with a 15-subject leave-one-subject-out protocol on the Krumm dataset, it reached a normalized RMSE of 0.15 body weight for the dynamic reference in walking. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
       "I am currently finishing my MSc in Artificial Intelligence at CUHK, after a BEng in Computer Engineering at CUHK-Shenzhen. Outside of coursework I like problems with a hard number attached to them — a latency budget, an accuracy floor, a crash-recovery deadline."
     ],
     "focusAreas": [
@@ -115,7 +116,7 @@
       "degree": "Master of Science in Artificial Intelligence",
       "period": "Sep 2025 – Mar 2027",
       "location": "Hong Kong",
-      "gpa": "3.8/4",
+      "gpa": "3.6/4",
       "courses": "Natural Language Processing, Generative AI, Speech and Language Processing",
       "highlights": []
     },
@@ -179,7 +180,8 @@
         "Redis",
         "MySQL",
         "Docker"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/auction-system"
     },
     {
       "title": "VLM-based Medical Ultrasound Anomaly Detection",
@@ -199,7 +201,8 @@
         "ViT",
         "BUS-UCLM",
         "BUSI"
-      ]
+      ],
+      "repo": ""
     },
     {
       "title": "Data Cleaning and Fine-tuning for a Lightweight LLM",
@@ -215,7 +218,8 @@
         "LLaMA-Factory",
         "Python",
         "Data cleaning"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/qwen2.5-0.5B-SFT"
     },
     {
       "title": "Personalized Email Agent for a Campus Context",
@@ -232,7 +236,8 @@
         "RAG",
         "Chain-of-Thought",
         "Multi-agent"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/Email_Assistant-AI_based"
     },
     {
       "title": "Brick Building Game with Leap Motion in Unity",
@@ -248,7 +253,8 @@
         "Unity",
         "C#",
         "Leap Motion"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/LEGOBuilder_Unity"
     },
     {
       "title": "Smoothing and Edge Enhancement for Artistic Style Images",
@@ -258,13 +264,14 @@
       "highlights": [
         "Combined smoothing and edge detection to transform an image into a different artistic style through edge enhancement.",
         "Designed colour adjustment and image merge methods to optimize the visual result.",
-        "Implemented the functions in Python and MATLAB and achieved acceptable results."
+        "Implemented the full pipeline in Python and MATLAB."
       ],
       "stack": [
         "Python",
         "MATLAB",
         "Image processing"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/Image_Art_Sytle_Change-Digital_Image_Processing"
     },
     {
       "title": "Content-Based Image Retrieval with a Database System",
@@ -272,15 +279,16 @@
       "context": "CUHK-Shenzhen",
       "tagline": "Pairing feature matching with a relational store.",
       "highlights": [
-        "Worked as a team member to combine image retrieval with a database system.",
+        "Built a content-based image retrieval pipeline as part of a team.",
         "Designed the database schema for image storage, feature storage and picture matching.",
-        "Integrated Python and MySQL code to achieve picture access and feature access."
+        "Integrated Python feature extraction with MySQL storage and retrieval."
       ],
       "stack": [
         "Python",
         "MySQL",
         "Database design"
-      ]
+      ],
+      "repo": ""
     },
     {
       "title": "2-Player Bouncing Ball Game on a Cortex-M3 Board",
@@ -289,7 +297,7 @@
       "tagline": "A real-time game on bare-metal embedded hardware.",
       "highlights": [
         "Wrote C++ code to implement and synchronize GPIO, USART, LCD, external interrupts and timers on a Cortex-M3 development board.",
-        "Delivered a smooth, lag-free gaming experience on embedded hardware, demonstrating low-level programming and embedded systems expertise."
+        "Delivered a responsive two-player game on bare-metal hardware, with LCD, GPIO, USART, interrupts and timers all driven from C++."
       ],
       "stack": [
         "C++",
@@ -297,7 +305,8 @@
         "Embedded",
         "GPIO",
         "USART"
-      ]
+      ],
+      "repo": ""
     }
   ],
   "skills": {
@@ -338,6 +347,11 @@
         "label": "Email",
         "value": "billchen2022@gmail.com",
         "url": "mailto:billchen2022@gmail.com"
+      },
+      {
+        "label": "GitHub",
+        "value": "github.com/Bill02Chen",
+        "url": "https://github.com/Bill02Chen"
       }
     ]
   }

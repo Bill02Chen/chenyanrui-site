@@ -44,6 +44,7 @@ Never invent facts that are not in the source resume.
     "labelAtAGlance": "…",
     "labelKeyResults": "…",
     "labelEmail": "…",
+    "labelRepo": "…",                // link text for a project repository, e.g. "Repository"
     "labelResume": "…",              // download/view resume button text
     "labelBackToTop": "…",
     "labelPresent": "…",             // "Present" / "至今"
@@ -61,7 +62,7 @@ Never invent facts that are not in the source resume.
     ],
     "highlights": ["…", "…"],        // "At a glance" bullets, 4–5 items
     "email": "billchen2022@gmail.com",
-    // no phone: the published site keeps contact to email only
+    // no phone: contact is limited to the public email and GitHub profile
     "resumeUrl": ""                  // "" when no public resume file exists yet
   },
 
@@ -103,7 +104,8 @@ Never invent facts that are not in the source resume.
       "context": "…",                // course / lab / training camp / independent
       "tagline": "…",                // ONE short line naming the problem
       "highlights": ["…"],           // 2–3 bullets, each with a concrete number where the resume has one
-      "stack": ["…"]                 // 3–6 technologies
+      "stack": ["…"],                // 3–6 technologies
+      "repo": "…"                    // public repository URL, "" when the code is not public
     }
   ],
 
@@ -116,7 +118,7 @@ Never invent facts that are not in the source resume.
 
   "contact": {
     "lede": "…",                     // 1–2 sentence invitation
-    "links": [                       // email only; url "" would render as plain text
+    "links": [                       // public contact channels: email, GitHub
       { "label": "…", "value": "…", "url": "mailto:…" }
     ]
   }
@@ -136,3 +138,9 @@ Never invent facts that are not in the source resume.
 5. **Periods.** Use the source resume's own date strings verbatim.
 6. **JSON validity.** Plain ASCII quotes, no trailing commas, no comments, no `//`.
    Use `\u2013`-style escapes only if needed; en dashes may be written literally as `–`.
+7. **Repositories.** `repo` is either `""` or a public `https://github.com/…` URL that the
+   reader can open without an account. Never link a private repository. Both language files
+   must carry the same URL for the same project.
+8. **Privacy.** The published site must not contain a phone number, a student ID, a home
+   address, or a private email. The only contact details allowed are the public email and
+   the public GitHub profile. `audit_content.py` enforces this on every published file.

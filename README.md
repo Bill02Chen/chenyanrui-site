@@ -74,9 +74,14 @@ values are translated. A project entry looks like this:
   "context": "CUHK",
   "tagline": "One line naming the problem.",
   "highlights": ["Two to five bullets, each carrying its own metric."],
-  "stack": ["PyTorch", "Redis"]
+  "stack": ["PyTorch", "Redis"],
+  "repo": "https://github.com/Bill02Chen/example"
 }
 ```
+
+Set `repo` to `""` when the code is not public; the project then shows no
+repository link. Public contact details are limited to the email address and the
+GitHub profile. Do not add a phone number, a student ID or a private address.
 
 To make the "Download CV" button appear, set `hero.resumeUrl` in `data/site.json`
 (and its counterpart in `zh/data/site.json`) to a PDF path inside this repo. While
@@ -95,12 +100,17 @@ Then open <http://localhost:8000/> or <http://localhost:8000/zh/>.
 
 ## Checks
 
-`tools/audit_content.py` reads the source résumés from a parent folder and is
-meant to run in the original working directory. It verifies that every number on
-the site traces back to a résumé and that both language versions describe the
-same experiences.
+`tools/audit_content.py` verifies that every number on the site traces back to a
+source résumé, that both language versions describe the same experiences, that
+every repository link is a public GitHub URL, and that no phone number reaches a
+published file.
 
 ```sh
-python3 tools/audit_content.py
+# Numeric check needs the résumés; pass them or let the script find them.
+python3 tools/audit_content.py --strict
 node tools/render_test.mjs
 ```
+
+Without the résumé files the audit skips the numeric check and still runs the
+schema, link, parity and privacy checks. The résumés themselves are not part of
+this repository.

@@ -126,13 +126,11 @@ function renderRail({ ui, hero }) {
     })
   );
 
-  /* Compact contact in the rail */
+  /* Compact contact in the rail. The published site is email-only by policy;
+     the renderer does not accept a phone field at all. */
   const quick = [];
   if (hero.email) {
     quick.push(contactRow(ui.labelEmail, hero.email, `mailto:${hero.email}`));
-  }
-  if (hero.phone) {
-    quick.push(contactRow(ui.labelPhone, hero.phone, telHref(hero.phone)));
   }
   fill($("rail-contact"), quick);
   $("rail-contact").hidden = !quick.length;
@@ -255,12 +253,33 @@ function renderProjects({ ui, projects }) {
 
   fill(
     $("project-list"),
-    (projects || []).map((item) => {
+    (projects || []).map((item, index) => {
       const wrap = el("article", "project");
       const grid = el("div", "project-grid");
 
       const left = el("div");
-      left.append(el("h3", "project-title", item.title));
+      const head = el("div", "project-head");
+      const heading = el("div", "project-heading");
+      const marker = el("span", "project-index", String(index + 1).padStart(2, "0"));
+      marker.setAttribute("aria-hidden", "true");
+      heading.append(marker, el("h3", "project-title", item.title));
+      head.append(heading);
+
+      /* The repository link is optional: only projects with public code show
+         one, so the page never offers a dead or private URL. */
+      if (item.repo) {
+        const repo = el("a", "project-repo");
+        repo.href = item.repo;
+        repo.target = "_blank";
+        repo.rel = "noreferrer";
+        repo.setAttribute("aria-label", `${ui.labelRepo}: ${item.title}`);
+        const arrow = el("span", "project-repo-arrow", "↗");
+        arrow.setAttribute("aria-hidden", "true");
+        repo.append(el("span", null, ui.labelRepo), arrow);
+        head.append(repo);
+      }
+
+      left.append(head);
       if (item.tagline) left.append(el("p", "project-tagline", item.tagline));
       const meta = el("div", "entry-meta");
       meta.style.marginTop = "14px";
@@ -498,10 +517,6 @@ function setMetaContent(name, value, attr = "name") {
     document.head.append(tag);
   }
   tag.setAttribute("content", value);
-}
-
-function telHref(phone) {
-  return `tel:${String(phone).replace(/[^\d+]/g, "")}`;
 }
 
 function renderError(error) {

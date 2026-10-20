@@ -406,6 +406,39 @@ async function testLocale(label, htmlPath, jsonPath) {
 
   check("projects rendered", get("project-list").childElementCount === data.projects.length,
     `${get("project-list").childElementCount} vs ${data.projects.length}`);
+
+  /* Repository links: exactly the projects with a public URL get one. */
+  const projectCards = get("project-list").children.filter((node) => node.__isNode);
+  const expectedRepos = data.projects.filter((project) => project.repo);
+  const renderedRepos = projectCards.flatMap((card) => card.querySelectorAll("a"));
+  check("project repository links rendered",
+    renderedRepos.length === expectedRepos.length,
+    `${renderedRepos.length} vs ${expectedRepos.length}`);
+
+  data.projects.forEach((project, index) => {
+    const card = projectCards[index];
+    const links = card ? card.querySelectorAll("a") : [];
+    if (project.repo) {
+      const link = links.find((node) => node.href === project.repo);
+      check(`projects[${index}] repository link`,
+        Boolean(link) &&
+          link.target === "_blank" &&
+          link.rel === "noreferrer" &&
+          link.textContent.includes(data.ui.labelRepo) &&
+          link.getAttribute("aria-label") === `${data.ui.labelRepo}: ${project.title}`,
+        link ? link.textContent : "missing");
+    } else {
+      check(`projects[${index}] has no repository link`, links.length === 0,
+        links.map((node) => node.href).join(", "));
+    }
+  });
+
+  const indices = projectCards.map((card) => card.querySelector(".project-index")?.textContent);
+  check("project indices rendered",
+    indices.length === data.projects.length &&
+      indices.every((value, index) => value === String(index + 1).padStart(2, "0")),
+    indices.join(", "));
+
   check("skill groups rendered", get("skill-groups").childElementCount === 4,
     String(get("skill-groups").childElementCount));
   check("contact links rendered", get("contact-links").childElementCount === data.contact.links.length);

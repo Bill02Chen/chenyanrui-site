@@ -33,14 +33,15 @@
     "headingLanguages": "语言能力",
     "headingInterests": "兴趣爱好",
     "introExperience": "面向工业外骨骼控制算法的实习工作，以及在非线性物理方向上的序列模型研究。",
-    "introProjects": "来自课程、训练营与独立完成的机器学习与系统工程实践。",
+    "introProjects": "来自课程、训练营与独立完成的项目。代码公开的项目附有仓库链接。",
     "introSkills": "我日常使用最多的编程语言、框架与工具。",
     "introContact": "我目前在寻找算法与机器学习工程方向的岗位，也欢迎研究上的交流与合作。",
     "labelEmail": "邮箱",
     "labelResume": "下载简历",
     "labelBackToTop": "返回顶部",
     "labelPresent": "至今",
-    "themeToggleLabel": "切换深色模式"
+    "themeToggleLabel": "切换深色模式",
+    "labelRepo": "代码仓库"
   },
   "hero": {
     "name": "陈彦睿",
@@ -55,7 +56,7 @@
     ],
     "stats": [
       {
-        "value": "3.8",
+        "value": "3.6",
         "unit": "/4",
         "label": "硕士 GPA"
       },
@@ -87,7 +88,7 @@
   "about": {
     "paragraphs": [
       "我做的系统，大多要经受物理世界的检验。在陨墨星，我为工业外骨骼定义场景转换识别任务：判断穿戴者正走上楼、下楼、上下坡还是回到平地，让助力在场景切换时柔顺变化。我用 8 个阶段、108 组对照实验比较算法与四类传感器点位，公开数据集用于验证选型、公司自采数据用于训练部署模型；自采楼梯数据上，按人留出的个人模型目标召回 96.1%（主管要求 90%）。算法以冻结模型与 ROS 2 主题接口交付，部署在 Jetson Orin Nano 上。",
-      "这种「先看约束、再看指标」的习惯贯穿了我其他的工作。我用「静态双支撑约束 + CNN-BiLSTM 动态力预测」的智能鞋垫标定方法，替换了依赖实验室测力台的方案，在 Krumm 公开数据集上完成 15 人留一验证，走路场景下动态参考的归一化 RMSE 达到 0.15 倍体重力；我微调 MedSAM 的图像编码器，让它不再依赖人工位置提示；我也把一份质量参差的训练数据清洗干净，让轻量级大模型真正学得进去。",
+      "这种「先看约束、再看指标」的习惯贯穿了我其他的工作。我提出了不依赖测力台的智能鞋垫标定方法，联合静态双支撑约束与 CNN-BiLSTM 动态力预测，在 Krumm 公开数据集上完成 15 人留一验证，走路场景下动态参考的归一化 RMSE 达到 0.15 倍体重力；我微调 MedSAM 的图像编码器，让它不再依赖人工位置提示；我也把一份质量参差的训练数据清洗干净，让轻量级大模型真正学得进去。",
       "我即将完成香港中文大学人工智能理学硕士的学业，本科毕业于香港中文大学（深圳）计算机工程专业。课余之外，我偏爱那些挂着硬指标的问题——一个延迟预算、一条精度下限，或者一个崩溃恢复的时限。"
     ],
     "focusAreas": [
@@ -115,7 +116,7 @@
       "degree": "人工智能理学硕士",
       "period": "2025年9月 – 2027年3月",
       "location": "香港",
-      "gpa": "3.8/4",
+      "gpa": "3.6/4",
       "courses": "自然语言处理、生成式人工智能、语音与语言处理",
       "highlights": []
     },
@@ -179,7 +180,8 @@
         "Redis",
         "MySQL",
         "Docker"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/auction-system"
     },
     {
       "title": "基于视觉基础模型的医学超声异常检测",
@@ -199,7 +201,8 @@
         "ViT",
         "BUS-UCLM",
         "BUSI"
-      ]
+      ],
+      "repo": ""
     },
     {
       "title": "轻量级大模型的数据清洗与微调",
@@ -215,7 +218,8 @@
         "LLaMA-Factory",
         "Python",
         "数据清洗"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/qwen2.5-0.5B-SFT"
     },
     {
       "title": "基于轻量级大模型的校园个性化邮件助手",
@@ -232,7 +236,8 @@
         "RAG",
         "思维链",
         "多智能体"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/Email_Assistant-AI_based"
     },
     {
       "title": "基于 Leap Motion 的 Unity 积木搭建游戏",
@@ -248,7 +253,8 @@
         "Unity",
         "C#",
         "Leap Motion"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/LEGOBuilder_Unity"
     },
     {
       "title": "面向艺术风格图像的平滑与边缘增强",
@@ -258,13 +264,14 @@
       "highlights": [
         "结合平滑与边缘检测方法，通过边缘增强技术将图像转换为不同艺术风格的图像。",
         "设计色彩调整与图像融合方法，优化最终视觉效果。",
-        "使用 Python 与 MATLAB 完成实现，并取得可接受的效果。"
+        "使用 Python 与 MATLAB 完成整条流水线的实现。"
       ],
       "stack": [
         "Python",
         "MATLAB",
         "图像处理"
-      ]
+      ],
+      "repo": "https://github.com/Bill02Chen/Image_Art_Sytle_Change-Digital_Image_Processing"
     },
     {
       "title": "结合数据库系统的图像检索系统",
@@ -272,15 +279,16 @@
       "context": "香港中文大学（深圳）",
       "tagline": "把特征匹配与关系型存储结合起来。",
       "highlights": [
-        "作为团队成员，将图像检索与数据库系统相结合。",
+        "作为团队成员，完成基于内容的图像检索流程。",
         "设计用于图像存储、特征存储及图像匹配的数据库模式。",
-        "整合 Python 与 MySQL 代码，实现图像访问与特征访问。"
+        "将 Python 特征提取与 MySQL 存储、检索流程打通。"
       ],
       "stack": [
         "Python",
         "MySQL",
         "数据库设计"
-      ]
+      ],
+      "repo": ""
     },
     {
       "title": "基于 Cortex-M3 开发板的双人弹球游戏",
@@ -289,7 +297,7 @@
       "tagline": "在裸机嵌入式硬件上跑一个实时游戏。",
       "highlights": [
         "编写 C++ 代码，在 Cortex-M3 开发板上实现并同步 GPIO、USART、LCD、外部中断与定时器。",
-        "在嵌入式硬件上实现流畅无卡顿的游戏体验，体现了底层编程与嵌入式系统方面的能力。"
+        "在裸机硬件上实现双人实时对局，用 C++ 驱动 LCD、GPIO、USART、中断与定时器。"
       ],
       "stack": [
         "C++",
@@ -297,7 +305,8 @@
         "嵌入式",
         "GPIO",
         "USART"
-      ]
+      ],
+      "repo": ""
     }
   ],
   "skills": {
@@ -338,6 +347,11 @@
         "label": "邮箱",
         "value": "billchen2022@gmail.com",
         "url": "mailto:billchen2022@gmail.com"
+      },
+      {
+        "label": "GitHub",
+        "value": "github.com/Bill02Chen",
+        "url": "https://github.com/Bill02Chen"
       }
     ]
   }
