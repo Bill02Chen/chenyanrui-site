@@ -390,6 +390,19 @@ async function testLocale(label, htmlPath, jsonPath) {
     `${get("stats").childElementCount} vs ${data.hero.stats.length}`);
   check("nav rendered (5 sections)", get("nav").childElementCount === 5, String(get("nav").childElementCount));
   check("rail contact rendered", get("rail-contact").childElementCount >= 1);
+
+  /* The GitHub profile must be reachable from the rail header, before scroll. */
+  const githubLink = data.contact.links.find((link) => link.url.startsWith("https://github.com/"));
+  const railGithub = get("rail-controls")
+    .querySelectorAll("a")
+    .find((link) => githubLink && link.href === githubLink.url);
+  check("rail GitHub control rendered",
+    Boolean(railGithub) &&
+      railGithub.target === "_blank" &&
+      railGithub.rel === "noreferrer" &&
+      railGithub.textContent === githubLink?.label,
+    railGithub ? railGithub.textContent : "missing");
+
   check("monogram rendered", get("monogram").textContent === data.hero.initials);
 
   check("about paragraphs rendered", get("about-prose").childElementCount === data.about.paragraphs.length);

@@ -71,7 +71,7 @@ function render(data) {
   setMetaContent("og:title", meta.title || hero.name, "property");
   setMetaContent("og:description", meta.description, "property");
 
-  renderRail({ ui, hero });
+  renderRail({ ui, hero, contact });
   renderAbout({ ui, about });
   renderExperience({ ui, education, experience });
   renderProjects({ ui, projects });
@@ -87,7 +87,7 @@ function render(data) {
 
 /* ---------------------------------- rail ---------------------------------- */
 
-function renderRail({ ui, hero }) {
+function renderRail({ ui, hero, contact }) {
   $("monogram").textContent = hero.initials || "";
   $("name").textContent = hero.name || "";
   $("role").textContent = hero.role || "";
@@ -112,6 +112,20 @@ function renderRail({ ui, hero }) {
   lang.textContent = ui.langSwitchLabel;
   lang.href = ui.langSwitchHref;
 
+  /* GitHub profile: a permanent control in the rail header, where the link is
+     visible before any scrolling. The URL comes from the contact block. */
+  const github = (contact?.links || []).find(
+    (link) => typeof link.url === "string" && link.url.startsWith("https://github.com/")
+  );
+  if (github) {
+    const link = el("a", "control", github.label);
+    link.href = github.url;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.title = github.label;
+    $("rail-controls").prepend(link);
+  }
+
   /* Rail navigation */
   fill(
     $("nav"),
@@ -126,8 +140,8 @@ function renderRail({ ui, hero }) {
     })
   );
 
-  /* Compact contact in the rail. The published site is email-only by policy;
-     the renderer does not accept a phone field at all. */
+  /* Compact email row in the rail. The GitHub control lives in the header;
+     the renderer still rejects a phone field outright. */
   const quick = [];
   if (hero.email) {
     quick.push(contactRow(ui.labelEmail, hero.email, `mailto:${hero.email}`));
