@@ -2,7 +2,7 @@
   "meta": {
     "lang": "en",
     "title": "Yanrui Chen — AI Engineer & MSc Student",
-    "description": "Yanrui Chen is an MSc in Artificial Intelligence candidate at CUHK building real-time ML systems for wearable robotics, medical imaging, and large language models.",
+    "description": "Yanrui Chen is an MSc in Artificial Intelligence candidate at CUHK building real-time algorithms for wearable robotics: IMU gait and pose estimation, sensor calibration and error attribution, medical imaging, and large language models.",
     "footerNote": "Built with plain HTML, CSS and JavaScript. Hosted anywhere."
   },
   "ui": {
@@ -32,7 +32,7 @@
     "headingFrameworks": "Frameworks & tools",
     "headingLanguages": "Languages",
     "headingInterests": "Interests",
-    "introExperience": "Industrial algorithm work on exoskeleton control, plus research on sequence models for nonlinear physics.",
+    "introExperience": "Consumer-exoskeleton work on IMU gait and pose estimation, plus research on sequence models for nonlinear physics.",
     "introProjects": "Selected work from coursework, a training camp, and independent builds. Repositories are linked where the code is public.",
     "introSkills": "The languages, frameworks and tools I reach for most often.",
     "introContact": "I am open to algorithm and machine learning engineering roles, and to research collaborations.",
@@ -46,13 +46,13 @@
   "hero": {
     "name": "Yanrui Chen",
     "initials": "YC",
-    "role": "MSc in Artificial Intelligence · Real-time ML for wearable robotics",
-    "summary": "I am an MSc in Artificial Intelligence candidate at CUHK. At Shenzhen Yunmostar I build EMG-and-IMU gait control for industrial exoskeletons, where a model only matters if it meets its latency budget. My projects span medical ultrasound segmentation, LLM fine-tuning, and a high-concurrency auction backend.",
+    "role": "MSc in Artificial Intelligence · Real-time algorithms for wearable robotics",
+    "summary": "I am an MSc in Artificial Intelligence candidate at CUHK. At Shenzhen Yunmostar I build EMG-and-IMU gait control and IMU-based pose algorithms for a consumer exoskeleton: scene-transition recognition, then the input pipeline, six-IMU calibration and error attribution behind sparse-IMU human pose estimation. Here a model only matters if it meets its latency budget and its numbers survive an audit. Before this I studied electronic information and computer engineering at CUHK-Shenzhen, and built projects in medical image segmentation, LLM fine-tuning and a high-concurrency auction backend.",
     "facts": [
       "Hong Kong",
       "MSc AI, CUHK",
-      "BEng Computer Engineering",
-      "Exoskeleton control algorithms"
+      "BEng Electronic Information and Computer Engineering",
+      "Exoskeleton algorithms"
     ],
     "stats": [
       {
@@ -73,23 +73,24 @@
       {
         "value": "96.1",
         "unit": "%",
-        "label": "Stair transition recall (holdout)"
+        "label": "Stair transition recall (within-subject)"
       }
     ],
     "highlights": [
-      "Defined the scene-transition recognition task and evaluation protocol for an industrial exoskeleton, delivering a frozen model with a ROS 2 topic interface",
-      "Fine-tuned a 90M-parameter ViT encoder to lift ultrasound lesion IoU from 0.093 to 0.737",
-      "Designed a fully asynchronous Redis bidding pipeline holding 11.4 ms average latency under load",
-      "Comfortable across the stack: model training, embedded signal processing, and the services around them"
+      "Defined the scene-transition recognition task for a consumer exoskeleton and delivered a frozen ONNX + TensorRT model behind a ROS 2 topic interface on a Jetson Orin Nano",
+      "Built the sparse-IMU input pipeline (6-DoF ESKF + walking calibration) and ran the six-IMU offline calibration and Allan-variance analysis behind a three-layer pose error study",
+      "Fine-tuned a 90M-parameter ViT encoder to lift prompt-free ultrasound lesion IoU from 0.093 to 0.737",
+      "Held 98.4% bid success and 65 ms P99 round-trip at 1,000 concurrent WebSocket connections per live room (local benchmark)"
     ],
     "email": "billchen2022@gmail.com",
     "resumeUrl": ""
   },
   "about": {
     "paragraphs": [
-      "I build systems where a model has to survive contact with the physical world. At Yunmostar I defined the scene-transition recognition task for an industrial exoskeleton: deciding whether the wearer is starting to climb stairs, descend stairs, go up or down a slope, or return to level ground, so that assist torque can change smoothly at each transition. I ran an 8-stage, 108-run comparison across algorithms and four sensor placements, using a public dataset to validate the selection and company-collected data to train the deployed model; the per-subject holdout model reached 96.1% target recall on stairs (90% required). The algorithm shipped as a frozen model with a ROS 2 topic interface on a Jetson Orin Nano.",
-      "That same instinct for the constraint, rather than the benchmark, runs through the rest of my work. I proposed a force-plate-free smart-insole calibration method that combines static double-support constraints with CNN-BiLSTM vertical ground reaction force prediction; validated with a 15-subject leave-one-subject-out protocol on the Krumm dataset, it reached a normalized RMSE of 0.15 body weight for the dynamic reference in walking. I fine-tuned MedSAM's image encoder on ultrasound data to remove its dependence on manual prompts, and I built a data cleaning pipeline that turned a noisy corpus into something a lightweight LLM could actually learn from.",
-      "I am currently finishing my MSc in Artificial Intelligence at CUHK, after a BEng in Computer Engineering at CUHK-Shenzhen. Outside of coursework I like problems with a hard number attached to them — a latency budget, an accuracy floor, a crash-recovery deadline."
+      "I build systems where a model has to survive contact with the physical world. At Yunmostar I defined the scene-transition recognition task for a consumer exoskeleton: telling whether the wearer is starting to climb stairs, descend them, go up or down a slope, or return to level ground, so assist torque can change smoothly at each transition. I ran an 8-stage, 108-run comparison of time-series algorithms and IMU placements, using public MyPredict1 data to validate the selection and company data to train the deployed model. In a within-subject test on self-collected stair data, a 13-point ROCKET model reached 96.1% target recall with a 1.24% steady-state false-alarm rate, against a 90% bar. The algorithm shipped as a frozen ONNX + TensorRT FP16 model behind a ROS 2 topic interface on a Jetson Orin Nano; on-device, 57 real input windows produced no class change against the reference, at about 5 ms of inference and scheduling cost.",
+      "The model was only half of the work. Delsys IMUs output acceleration and angular rate but no reliable absolute attitude, so I built the input pipeline first: a 6-DoF ESKF (15-state error, no magnetometer, gravity alignment plus ZUPT on static segments) to rebuild sensor attitude, then an N-pose → one step → N-pose walking calibration for the world-to-human and sensor-to-bone rotations. The six IMUs' accelerometer magnitude and gyro bias were corrected offline, with parameters validated on data excluded from estimation, and their noise characterised with Allan variance. With that pipeline in place, the error could be split into three layers: device, heading and mounting. The paper's walking calibration and mine turned out to differ only in coordinate decomposition, leaving the final rotation almost unchanged; replacing the forearm sensor-to-bone rotation with a mocap-fitted version cut in-sample local rotation error from 19.63° to 16.29° across two trials, each fitted with its own trial's mocap. That shows the mounting rotation is one of the error sources; it is not a deployable calibration method. Encoder constraints and fine-tuning both degraded the global trajectory and were not adopted.",
+      "The same habit — measure the constraint, then decide — runs through the rest of my work. I added automatic mocap gait-event labelling to the existing annotation platform: rules generate IC/TC, start-stop and T1 terrain-transition candidates, turning a 10-minute trial that used to take about 90 minutes of manual labelling into 10–20 seconds of candidate generation plus human review; all newly collected training data now uses it. I proposed a force-plate-free insole calibration that combines static double-support constraints with CNN-BiLSTM dynamic force prediction, validated with a 15-subject leave-one-subject-out protocol on the Krumm dataset, reaching a normalized RMSE of 0.15 body weight for the dynamic reference in walking. I fine-tuned MedSAM's image encoder so it no longer depends on manual prompts, and cleaned a noisy training corpus so that a model as small as Qwen2.5-0.5B could actually learn from it.",
+      "I am finishing my MSc in Artificial Intelligence at CUHK, after a BEng in Electronic Information and Computer Engineering at CUHK-Shenzhen. Outside coursework I like problems with a hard number attached: a latency budget, an accuracy floor, a crash-recovery deadline."
     ],
     "focusAreas": [
       {
@@ -97,8 +98,16 @@
         "description": "Causal, low-latency models over high-channel-count EMG and IMU streams, built to run inside a control loop rather than an offline notebook."
       },
       {
+        "title": "Sensor calibration and state estimation",
+        "description": "Offline IMU calibration, Allan variance, ESKF and mounting-matrix errors: decide first whether the error comes from the device, the heading or the mounting, then decide what to fix."
+      },
+      {
+        "title": "Evaluation protocol design",
+        "description": "Multi-condition comparison matrices, unified metrics and honest negative results: confirm what a number actually measures before trusting it."
+      },
+      {
         "title": "Medical imaging",
-        "description": "Adapting foundation models such as MedSAM to prompt-free clinical tasks with patient-level splits and honest generalization checks."
+        "description": "Adapting foundation models such as MedSAM to prompt-free clinical segmentation, with patient-level splits and honest generalization boundaries."
       },
       {
         "title": "LLM fine-tuning and data quality",
@@ -106,7 +115,7 @@
       },
       {
         "title": "High-concurrency backends",
-        "description": "Asynchronous, Redis-centred service design with atomic locking, rate limiting and self-healing supervision."
+        "description": "Asynchronous, Redis-centred service design with atomic operations, rate limiting and self-healing supervision."
       }
     ]
   },
@@ -122,7 +131,7 @@
     },
     {
       "school": "The Chinese University of Hong Kong, Shenzhen",
-      "degree": "Bachelor of Engineering in Computer Engineering",
+      "degree": "Bachelor of Engineering in Electronic Information and Computer Engineering",
       "period": "Sep 2021 – Jun 2025",
       "location": "Shenzhen",
       "gpa": "3.4/4",
@@ -134,16 +143,18 @@
     {
       "organization": "Shenzhen Yunmostar Artificial Intelligence Co., Ltd.",
       "role": "Algorithm Intern",
-      "period": "Jul 2026 – Present",
+      "period": "Jun 2026 – Present",
       "location": "Shenzhen",
       "kind": "internship",
-      "summary": "Building the sensing and control algorithms that let an industrial exoskeleton read human intent, recognise locomotion transitions, and estimate human pose in real time.",
+      "summary": "Building the sensing algorithms that let a consumer exoskeleton read human intent, recognise locomotion transitions and estimate human pose in real time: from IMU scene-transition recognition to the input pipeline, device calibration and error attribution for sparse-IMU pose estimation.",
       "highlights": [
-        "Scene-aware assist switching for an industrial exoskeleton had no comparable basis for algorithm or sensor-placement choices; I defined the evaluation protocol and ran an 8-stage, 108-run comparison across four sensor placements, using public MyPredict1 to validate the selection and company-collected data to train the deployed model.",
-        "The per-subject holdout model reached 96.1% target recall on stairs (90% required); delivered the frozen model with a ROS 2 topic interface deployed on a Jetson Orin Nano.",
-        "Exoskeleton control requires accurate upper-body pose input; I reproduced two sparse-IMU pose estimation methods (GlobalPose and GRIP) and unified their evaluation protocols, then adapted GlobalPose to the company IMU pipeline.",
-        "Through matrix decomposition and single-variable substitution I located the forearm sensor-to-bone rotation (RSB) as a major error source; an in-sample, mocap-fitted RSB correction cut local rotation error by 17.0% (19.63° → 16.29°, 2 trials with 1 fitting session each) and left-wrist relative position error by 76.9%.",
-        "Raw insole signals cannot directly represent vertical ground reaction force, and professional force measurement equipment is expensive and hard to scale; I proposed a force-plate-free insole vertical force calibration method combining static double-support constraints with CNN-BiLSTM dynamic force prediction; validated with 15-subject leave-one-subject-out on the Krumm dataset, the dynamic reference reached a normalized RMSE of 0.15 body weight in walking."
+        "Defined four assist states for a consumer exoskeleton — hold, up-transition, down-transition, back to level ground. Ran an 8-stage, 108-run comparison of time-series algorithms and IMU placements; on self-collected stair data, a 13-point ROCKET model reaches 96.1% target recall and a 1.24% steady-state false-alarm rate in a within-subject test (the bar was 90% on stairs).",
+        "Delivered a frozen ONNX + TensorRT FP16 model behind a ROS 2 (C++) topic interface and deployed it on a Jetson Orin Nano; on-device, 57 real input windows produced no class change against the reference, at about 5 ms of inference and scheduling cost.",
+        "Delsys IMUs expose only acceleration and angular rate, with no reliable absolute attitude. I configured a 6-DoF ESKF (15-state error, no magnetometer, gravity alignment and ZUPT on static segments) and implemented an N-pose → one step → N-pose walking calibration that recovers the world-to-human and sensor-to-bone rotations (RMB = RIMᵀ · RIS · RSB), so GlobalPose can consume company data directly. Without a magnetometer absolute heading stays unobservable, so heading analysis is done only after aligning the initial heading with mocap.",
+        "Calibrated six Delsys IMUs offline — accelerometer magnitude and gyroscope static bias — validated the parameters on independent data, and characterised ARW, VRW and bias instability with Allan variance. With gyro-bias-only correction the torso keeps leaning forward after large motions and the recovery segment stays at 12–13°; the full calibration brings the stair-and-high-knee sequence to 7–9°.",
+        "Reproduced GlobalPose and GRIP, two sparse-IMU human pose estimation methods, unified their evaluation protocol and selected GlobalPose; the old table's two headline errors came from different definitions, so they cannot justify the choice — I corrected that myself later in a protocol audit.",
+        "Localised the error source through matrix decomposition and single-variable substitution: the paper's walking calibration only changes the coordinate decomposition, with RIM and RIS each rotating by more than a hundred degrees and cancelling in the product. Replacing only the forearm sensor-to-bone rotation (RSB) with a mocap-fitted version cut in-sample local rotation error from 19.63° to 16.29° across 2 trials, each fitted with its own trial's mocap. Encoder constraints and fine-tuning both degraded the global trajectory and were not adopted.",
+        "Added automatic mocap gait-event labelling to the existing annotation platform: rule-generated IC/TC, start-stop and T1 terrain-transition candidates turn a 10-minute trial that used to take about 90 minutes of manual labelling into 10–20 seconds of candidate generation plus human review; all newly collected data now goes through it."
       ]
     },
     {
@@ -163,14 +174,14 @@
     {
       "title": "Full-stack Live-stream E-commerce Auction System",
       "period": "May – Jun 2026",
-      "context": "2026 ByteDance AI Full-Stack Challenge (independent entry)",
+      "context": "2026 ByteDance AI Full-Stack Challenge",
       "tagline": "Millisecond bid synchronization without synchronous database writes.",
       "highlights": [
-        "Designed a fully asynchronous bidding pipeline using pure in-memory Redis operations with 5-second batch persistence to MySQL.",
-        "Implemented an atomic Lua bidding script (now the default, replacing the original distributed-lock engine), Redis ZSet real-time leaderboards, per-user rate limiting, and a triple-heartbeat self-healing daemon.",
-        "Built a React and TypeScript frontend with a Node.js and Socket.IO backend and one-click Docker deployment.",
-        "98.4% bid success rate with 11.4 ms average / 65 ms P99 client round-trip latency at 1,000 concurrent WebSocket connections per live room (local benchmark).",
-        "Rebuilds auction state from MySQL with leaderboard replay within one heartbeat after Redis state loss; post-camp self-audit raised same-millisecond burst success from 0.03% to 100% (199 ms average) and cut downstream broadcast messages ~430×."
+        "Independent entry. Coding was AI-assisted; I designed the bidding path and the acceptance tests. The stack is React + TypeScript, Node.js + Socket.IO, Redis and MySQL, with one-click Docker deployment.",
+        "Bids run entirely as in-memory Redis operations with 5-second batch persistence to MySQL. The atomic Lua script became the default bidding path, replacing the original distributed-lock engine, alongside ZSet leaderboards, per-user rate limiting and a triple-heartbeat self-healing daemon.",
+        "The competition build reached 98.4% bid success with 11.4 ms average and 65 ms P99 round-trip at 1,000 concurrent WebSocket connections per live room (local benchmark).",
+        "Post-camp fixes raised same-millisecond burst success from 0.03% to 100% (199 ms average) across 3000 bids and cut downstream broadcast volume by about 430×; state is rebuilt from MySQL with leaderboard replay after Redis loss.",
+        "A post-event re-test found the server had accepted only 7 bids while the client reported 2934 successes. The load script was counting other bidders' success broadcasts; verifying each request ID made both sides agree."
       ],
       "stack": [
         "React",
@@ -184,16 +195,16 @@
       "repo": "https://github.com/Bill02Chen/auction-system"
     },
     {
-      "title": "VLM-based Medical Ultrasound Anomaly Detection",
+      "title": "Prompt-free Breast Ultrasound Lesion Segmentation with MedSAM",
       "period": "Apr 2026",
       "context": "CUHK",
       "tagline": "Removing MedSAM's dependence on manual position prompts.",
       "highlights": [
-        "Benchmarked raw MedSAM to quantify its prompt-free limitations in automated clinical workflows.",
-        "Froze the prompt encoder and fine-tuned the 90M-parameter ViT image encoder and mask decoder on the BUS-UCLM training set only, with a hybrid BCE and Dice loss.",
-        "Used patient-level data splits to prevent leakage between training and evaluation.",
+        "MedSAM depends on manual position prompts and fails without them in an automated workflow; I benchmarked the unmodified model prompt-free to quantify that limit (IoU 0.093 on BUS-UCLM).",
+        "Froze the prompt encoder and fine-tuned the 90M-parameter ViT image encoder and mask decoder with a hybrid BCE and Dice loss, training on the BUS-UCLM training set only, with patient-level splits.",
         "Improved IoU from 0.093 to 0.737 and F1 from 0.157 to 0.823 on BUS-UCLM (same-protocol U-Net: IoU 0.5414).",
-        "Generalized to an unseen, abnormal-only BUSI subset with IoU 0.591 vs. U-Net's 0.2603; 12 FPS at batch size 1 on a single RTX 4090."
+        "Generalized to an unseen, abnormal-only BUSI subset with IoU 0.591 vs. U-Net's 0.2603; BUSI was never used in training.",
+        "Reached 12 FPS at batch size 1 on a single RTX 4090."
       ],
       "stack": [
         "PyTorch",
@@ -205,14 +216,15 @@
       "repo": ""
     },
     {
-      "title": "Data Cleaning and Fine-tuning for a Lightweight LLM",
+      "title": "Data Cleaning and Full Fine-tuning for a Lightweight LLM",
       "period": "Feb 2026",
       "context": "CUHK",
-      "tagline": "Turning a noisy corpus into something a small model can actually learn from.",
+      "tagline": "Turning a noisy corpus into something a 0.5B model can actually learn from.",
       "highlights": [
-        "Diagnosed formatting issues, quality problems and semantic inconsistencies in the raw dataset, which made it unsuitable for effective fine-tuning.",
-        "Designed a data cleaning pipeline addressing non-standard roles, missing fields, duplicate text and semantic consistency, then ran full fine-tuning in LLaMA-Factory.",
-        "Kept 240,340 rows after cleaning for full fine-tuning; under an identical evaluation setup, MMLU (5-shot) improved from 0.253 to 0.400 and BoolQ from 0.632 to 0.718, while three PIQA and HellaSwag metrics decreased by 0.7–1.4 pt."
+        "The raw OpenOrca subset had formatting issues, quality problems and semantic inconsistencies, which made it unsuitable for fine-tuning; I diagnosed them first, then designed a cleaning pipeline covering non-standard roles, missing fields, duplicate text and semantic consistency.",
+        "Kept 240,340 rows out of the first 1,000,000 for training.",
+        "Ran full supervised fine-tuning of Qwen2.5-0.5B in LLaMA-Factory on a single NVIDIA L4 (2 epochs).",
+        "Under an identical evaluation setup, MMLU (5-shot) improved from 0.253 to 0.400 and BoolQ from 0.632 to 0.718, while three PIQA and HellaSwag metrics decreased by 0.7–1.4 pt."
       ],
       "stack": [
         "LLaMA-Factory",
@@ -332,22 +344,28 @@
     "programming": [
       "Python",
       "C++",
-      "Java",
       "MATLAB",
+      "SQL",
+      "Java",
       "VHDL",
       "Verilog"
     ],
     "frameworks": [
-      "TensorFlow",
       "PyTorch",
+      "TensorFlow",
+      "ONNX",
+      "TensorRT",
+      "ROS 2",
+      "Jetson",
+      "Docker",
+      "Redis",
       "MySQL",
       "Unity",
       "Blender",
-      "Figma",
-      "ROS2"
+      "Figma"
     ],
     "languages": [
-      "English (advanced, CET6 538/710, CET4 636/710)",
+      "English (advanced; TOEFL 97, GRE 321, CET-6 538/710)",
       "Chinese (native)",
       "Cantonese (fluent)",
       "German (beginner)"

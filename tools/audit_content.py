@@ -3,7 +3,9 @@
 
 Proves that every numeric claim and every entry on the site traces back to the
 source resume, and that the two language versions stay structurally in sync.
-Also checks repository links, contact channels and the privacy policy.
+Numeric claims may come from the Chinese docx variants, the current LaTeX
+résumé (the newest baseline) or the English CV. Also checks repository links,
+contact channels and the privacy policy.
 
 Run:  python3 tools/audit_content.py --strict
 """
@@ -58,6 +60,10 @@ RESUME_NAMES = (
     "简历_2026_10_陈彦睿_可穿戴生理信号.docx",
     "简历_2026_10_陈彦睿_医学图像.docx",
 )
+# The current Chinese resume is the LaTeX build; it carries claims (input
+# pipeline, device calibration, within-subject protocol) that the older docx
+# variants do not. Read its body text so the site can trace numbers to it.
+RESUME_TEX_NAMES = ("简历_2026_10_陈彦睿_算法工程师常规版.tex",)
 CV_NAMES = ("CV_2026_full_version_陈彦睿.docx",)
 
 
@@ -89,6 +95,53 @@ def docx_text(path: Path) -> str:
         for row in table.rows:
             for cell in row.cells:
                 parts.append(cell.text)
+    return "\n".join(parts)
+
+
+# Macros whose brace arguments carry résumé content. Reading only these keeps
+# layout numbers (\vspace{3pt}, \fontsize{10}{13.2}) out of the token set.
+CONTENT_MACROS = (
+    "cvsection", "orgentry", "roleentry", "eduentry", "edusubentry",
+    "educourse", "projectentry", "skillentry", "cvitem",
+)
+
+
+def _brace_arg(text: str, start: int) -> tuple[str, int]:
+    """Return the balanced {...} group that starts at text[start]."""
+    depth = 0
+    out: list[str] = []
+    i = start
+    while i < len(text):
+        ch = text[i]
+        if ch == "{":
+            depth += 1
+            if depth == 1:
+                i += 1
+                continue
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return "".join(out), i + 1
+        if depth:
+            out.append(ch)
+        i += 1
+    return "".join(out), i
+
+
+def tex_text(path: Path) -> str:
+    """Content text of the LaTeX résumé (macro arguments only)."""
+    raw = path.read_text(encoding="utf-8")
+    pattern = re.compile(r"\\(%s)\*?" % "|".join(CONTENT_MACROS))
+    parts: list[str] = []
+    for match in pattern.finditer(raw):
+        i = match.end()
+        while True:
+            while i < len(raw) and raw[i] in " \t\n":
+                i += 1
+            if i >= len(raw) or raw[i] != "{":
+                break
+            arg, i = _brace_arg(raw, i)
+            parts.append(arg)
     return "\n".join(parts)
 
 
@@ -174,6 +227,7 @@ def resolve(doc, dotted):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--resume", type=Path, help="Chinese resume (baseline)")
+    parser.add_argument("--tex", type=Path, help="current LaTeX resume (baseline)")
     parser.add_argument("--cv", type=Path, help="English CV (supplement)")
     parser.add_argument(
         "--strict",
@@ -186,10 +240,13 @@ def main(argv: list[str] | None = None) -> int:
     notes: list[str] = []
 
     resume_path = find_source(args.resume, RESUME_NAMES)
+    tex_path = find_source(args.tex, RESUME_TEX_NAMES)
     cv_path = find_source(args.cv, CV_NAMES)
 
     if args.resume and not resume_path:
         failures.append(f"--resume not found: {args.resume}")
+    if args.tex and not tex_path:
+        failures.append(f"--tex not found: {args.tex}")
     if args.cv and not cv_path:
         failures.append(f"--cv not found: {args.cv}")
 
@@ -207,12 +264,21 @@ def main(argv: list[str] | None = None) -> int:
             # Fact policy: the Chinese resume is the baseline; the English CV
             # supplies only what the Chinese one omits. A claim on either page
             # must therefore be traceable to the baseline or the supplement.
+            # The current LaTeX résumé is the newest baseline, so its content
+            # numbers count as baseline too.
             baseline_numbers = numbers(zh_resume)
+            if tex_path:
+                baseline_numbers |= numbers(tex_text(tex_path))
             supplement_numbers = numbers(en_resume) - baseline_numbers
             print(
                 f"Sources: {resume_path.name} "
-                f"({len(baseline_numbers)} numeric tokens) + {cv_path.name}"
+                + (f"+ {tex_path.name} " if tex_path else "")
+                + f"({len(baseline_numbers)} numeric tokens) + {cv_path.name}"
             )
+            if not tex_path and args.strict:
+                notes.append(
+                    "current LaTeX resume not found; only docx sources were used"
+                )
     else:
         missing = [
             str(path)
