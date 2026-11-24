@@ -63,7 +63,7 @@ RESUME_NAMES = (
 # The current Chinese resume is the LaTeX build; it carries claims (input
 # pipeline, device calibration, within-subject protocol) that the older docx
 # variants do not. Read its body text so the site can trace numbers to it.
-RESUME_TEX_NAMES = ("简历_2026_10_陈彦睿_算法工程师常规版.tex",)
+RESUME_TEX_NAMES = ("简历_陈彦睿_算法工程师_27年应届生.tex",)
 CV_NAMES = ("CV_2026_full_version_陈彦睿.docx",)
 
 
@@ -71,7 +71,13 @@ def find_source(explicit: Path | None, names: tuple[str, ...]) -> Path | None:
     """Locate a source document without assuming one workspace layout."""
     if explicit:
         return explicit if explicit.exists() else None
-    for base in (ROOT.parent, ROOT.parent / "备份"):
+    for base in (
+        ROOT.parent / "简历",
+        ROOT.parent / "简历" / "docx",
+        ROOT.parent / "归档",
+        ROOT.parent,
+        ROOT.parent / "备份",
+    ):
         for name in names:
             candidate = base / name
             if candidate.exists():
